@@ -21,7 +21,7 @@ export const saveFile = async (
 ): Promise<void> => {
   const filePath = `${RNFS.DocumentDirectoryPath}/${filename}.${extension}`;
   try {
-    await RNFS.writeFile(filePath, content, 'utf8');
+    await RNFS.writeFile(filePath, content, 'base64');
     logger.log(`saved file: ${filename}`);
   } catch (error) {
     logger.error(`cannot save file: ${filename} - ${error}`);
@@ -31,7 +31,7 @@ export const saveFile = async (
 export const readFile = async (filename: string): Promise<FileData | null> => {
   try {
     const filePath = `${RNFS.DocumentDirectoryPath}/${filename}`;
-    const fileContent = await RNFS.readFile(filePath, 'utf8');
+    const fileContent = await RNFS.readFile(filePath, 'base64');
     const extension = filename.split('.').pop() as FileType;
     return {extension, content: fileContent};
   } catch (error) {
@@ -40,8 +40,19 @@ export const readFile = async (filename: string): Promise<FileData | null> => {
   }
 };
 
+export const deleteFile = async (filename: string): Promise<void> => {
+  try {
+    const filePath = `${RNFS.DocumentDirectoryPath}/${filename}`;
+    await RNFS.unlink(filePath);
+    logger.log(`deleted file: ${filename}`);
+  } catch (error) {
+    logger.error(`cannot delete file: ${filename} - ${error}`);
+  }
+};
+
 export default {
   FileType,
   saveFile,
   readFile,
+  deleteFile,
 };

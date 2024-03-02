@@ -34,7 +34,7 @@ export default function DiaryEntry({entry}: DiaryEntryProps) {
         <Text
           style={styles.deleteButton}
           onPress={() => {
-            deleteDiaryEntry(entry.date);
+            deleteDiaryEntry();
           }}>
           Delete
         </Text>
