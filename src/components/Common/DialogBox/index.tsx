@@ -15,10 +15,11 @@ import {View, StyleSheet, Modal, TouchableWithoutFeedback} from 'react-native';
 import {DialogBoxContext} from '../../../contexts/DialogBoxContext';
 
 interface DialogBoxProps {
+  children?: React.JSX.Element;
   onClose?: () => void;
 }
 
-export default function DialogBox({onClose}: DialogBoxProps) {
+export default function DialogBox({children, onClose}: DialogBoxProps) {
   const {visible, setVisible, content} = useContext(DialogBoxContext);
 
   return (
@@ -29,7 +30,7 @@ export default function DialogBox({onClose}: DialogBoxProps) {
       onRequestClose={onClose}>
       <TouchableWithoutFeedback onPress={() => setVisible(false)}>
         <View style={styles.centeredView}>
-          <View style={styles.modalView}>{content}</View>
+          <View style={styles.modalView}>{content || children}</View>
         </View>
       </TouchableWithoutFeedback>
     </Modal>

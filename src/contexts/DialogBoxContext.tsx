@@ -5,6 +5,7 @@ const DialogBoxContext = createContext({
   setVisible: (visible: boolean) => {
     visible;
   },
+
   content: <></>,
   setContent: (content: React.JSX.Element) => {
     content;

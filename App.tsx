@@ -5,6 +5,7 @@ import DialogBoxProvider, {
 } from './src/contexts/DialogBoxContext';
 import DialogBox from './src/components/Common/DialogBox';
 import EditDialogProvider from './src/contexts/EditDialogContext';
+import StackNavigationProvider from './src/contexts/StackNavigation';
 
 function App(): React.JSX.Element {
   const {visible, setVisible, setContent} = React.useContext(DialogBoxContext);
@@ -28,10 +29,12 @@ function App(): React.JSX.Element {
 
 export default function AppWithProviders() {
   return (
-    <DialogBoxProvider>
-      <EditDialogProvider>
-        <App />
-      </EditDialogProvider>
-    </DialogBoxProvider>
+    <StackNavigationProvider>
+      <DialogBoxProvider>
+        <EditDialogProvider>
+          <App />
+        </EditDialogProvider>
+      </DialogBoxProvider>
+    </StackNavigationProvider>
   );
 }

@@ -1,15 +1,23 @@
-import React, {createContext, useState} from 'react';
+import React, {createContext, useState, useContext, useEffect} from 'react';
+import {DialogBoxContext} from './DialogBoxContext';
+import {View, TextInput, Button} from 'react-native';
 
 const EditDialogContext = createContext({
   title: '',
-  onEditCallback: (data: any) => {
-    data;
-  },
   setDialogTitle: (title: string) => {
     title;
   },
+
+  onEditCallback: (data: any) => {
+    data;
+  },
   setOnEditCallback: (callback: any) => {
     callback;
+  },
+
+  visible: false,
+  setShowEditDialog: (visible: boolean) => {
+    visible;
   },
 });
 
@@ -28,10 +36,38 @@ export default function EditDialogProvider({
 }) {
   const [title, setDialogTitle] = useState('');
   const [onEditCallback, setOnEditCallback] = useState<any>(() => {});
+  const {visible, setVisible, setContent} = useContext(DialogBoxContext);
+
+  useEffect(() => {
+    setContent(
+      <View>
+        <TextInput
+          value={title}
+          onChangeText={setDialogTitle}
+          placeholder="Enter a new title"
+        />
+        <Button
+          title="Save"
+          onPress={() => {
+            setVisible(false);
+            onEditCallback && onEditCallback(title);
+            setContent(<></>);
+          }}
+        />
+      </View>,
+    );
+  }, [onEditCallback, setContent, title, setDialogTitle, visible, setVisible]);
 
   return (
     <EditDialogContext.Provider
-      value={{title, setDialogTitle, onEditCallback, setOnEditCallback}}>
+      value={{
+        title,
+        setDialogTitle,
+        onEditCallback,
+        setOnEditCallback,
+        visible,
+        setShowEditDialog: setVisible,
+      }}>
       {children}
     </EditDialogContext.Provider>
   );

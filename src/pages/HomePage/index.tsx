@@ -19,7 +19,9 @@ export default function HomePage() {
 
   useEffect(() => {
     keyValueStorage.getAllDiaryEntries().then(setDiaryEntries);
-    keyValueStorage.getValue('userName').then(setUserName);
+    keyValueStorage
+      .getValue('userName')
+      .then(value => setUserName(value || 'User'));
   }, []);
 
   useEffect(() => {
