@@ -4,6 +4,7 @@ import DialogBoxProvider, {
   DialogBoxContext,
 } from './src/contexts/DialogBoxContext';
 import DialogBox from './src/components/Common/DialogBox';
+import EditDialogProvider from './src/contexts/EditDialogContext';
 
 function App(): React.JSX.Element {
   const {visible, setVisible, setContent} = React.useContext(DialogBoxContext);
@@ -28,7 +29,9 @@ function App(): React.JSX.Element {
 export default function AppWithProviders() {
   return (
     <DialogBoxProvider>
-      <App />
+      <EditDialogProvider>
+        <App />
+      </EditDialogProvider>
     </DialogBoxProvider>
   );
 }
