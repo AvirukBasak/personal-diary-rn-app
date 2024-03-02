@@ -13,15 +13,19 @@ Context structure
 */
 
 import React from 'react';
+import {useContext} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Icon} from 'react-native-elements';
+import {EditDialogContext} from '../../../contexts/EditDialogContext';
 
 interface TitleBarProps {
   title: string;
-  context: any;
+  setTitle: (title: string) => void;
 }
 
-export default function TitleBar({title, context}: TitleBarProps) {
+export default function TitleBar({title, setTitle}: TitleBarProps) {
+  const {setDialogTitle, setOnEditCallback} = useContext(EditDialogContext);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
@@ -30,7 +34,8 @@ export default function TitleBar({title, context}: TitleBarProps) {
         type="material"
         color="#517fa4"
         onPress={() => {
-          context.openEditDialog();
+          setDialogTitle(title);
+          setOnEditCallback(setTitle);
         }}
       />
     </View>
@@ -46,6 +51,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: '500',
   },
 });
