@@ -13,7 +13,7 @@ import DiaryEntryContextProvider, {
   DiaryEntryContext,
 } from '../../contexts/DiaryEntryContext';
 
-export default function DiaryEntryPage() {
+function DiaryEntryPage() {
   const {
     currentEntryID,
     entryTitle,
@@ -25,25 +25,31 @@ export default function DiaryEntryPage() {
   } = useContext(DiaryEntryContext);
 
   return (
+    <View key={currentEntryID} style={styles.container}>
+      <TitleBar title={entryTitle} setTitle={setEntryTitle} />
+      <ScrollView>
+        {entryContent.map((item, index) => {
+          return (
+            <View key={index}>
+              <Text>{item.content}</Text>
+            </View>
+          );
+        })}
+      </ScrollView>
+      <ToolBar
+        entryDate={entryDate}
+        setEntryDate={setEntryDate}
+        entryContent={entryContent}
+        setEntryContent={setEntryContent}
+      />
+    </View>
+  );
+}
+
+export default function DiaryEntryPageWithProvider() {
+  return (
     <DiaryEntryContextProvider>
-      <View key={currentEntryID} style={styles.container}>
-        <TitleBar title={entryTitle} setTitle={setEntryTitle} />
-        <ScrollView>
-          {entryContent.map((item, index) => {
-            return (
-              <View key={index}>
-                <Text>{item.content}</Text>
-              </View>
-            );
-          })}
-        </ScrollView>
-        <ToolBar
-          entryDate={entryDate}
-          setEntryDate={setEntryDate}
-          entryContent={entryContent}
-          setEntryContent={setEntryContent}
-        />
-      </View>
+      <DiaryEntryPage />
     </DiaryEntryContextProvider>
   );
 }
