@@ -35,7 +35,7 @@ function EditTextView({children}: {children: string}) {
       multiline
       editable={false}
       value={children}
-      style={{borderWidth: 1, borderColor: 'black'}}
+      style={styles.textInput}
     />
   );
 }
@@ -47,36 +47,36 @@ function GeoView({children}: {children: string}) {
       source={{
         uri: `https://www.google.com/maps/search/?api=1&query=${children}`,
       }}
-      style={{width: 100, height: 100}}
+      style={styles.geoView}
     />
   );
 }
 
-function ImageView({children}: {children: string}) {
-  return (
-    <View>
-      <Image
-        source={{
-          uri: `data:image/png;base64,${children}`,
-        }}
-        style={{width: 100, height: 100}}
-      />
-    </View>
-  );
-}
+// function ImageView({children}: {children: string}) {
+//   return (
+//     <View>
+//       <Image
+//         source={{
+//           uri: `data:image/png;base64,${children}`,
+//         }}
+//         style={{width: 100, height: 100}}
+//       />
+//     </View>
+//   );
+// }
 
-function VideoView({children}: {children: string}) {
-  return (
-    <View>
-      <Image
-        source={{
-          uri: `data:image/png;base64,${children}`,
-        }}
-        style={{width: 100, height: 100}}
-      />
-    </View>
-  );
-}
+// function VideoView({children}: {children: string}) {
+//   return (
+//     <View>
+//       <Image
+//         source={{
+//           uri: `data:image/png;base64,${children}`,
+//         }}
+//         style={{width: 100, height: 100}}
+//       />
+//     </View>
+//   );
+// }
 
 function DiaryEntryPage() {
   const {
@@ -92,7 +92,7 @@ function DiaryEntryPage() {
   return (
     <View key={currentEntryID} style={styles.container}>
       <TitleBar title={entryTitle} setTitle={setEntryTitle} />
-      <ScrollView>
+      <ScrollView style={styles.scrollView}>
         {entryContent.map((item, index) => {
           return (
             <View key={index}>
@@ -102,12 +102,12 @@ function DiaryEntryPage() {
               {item.extension === FileType.GEO && (
                 <GeoView>{item.content}</GeoView>
               )}
-              {item.extension === FileType.IMAGE && (
+              {/* {item.extension === FileType.IMAGE && (
                 <ImageView>{item.content}</ImageView>
               )}
               {item.extension === FileType.VIDEO && (
                 <VideoView>{item.content}</VideoView>
-              )}
+              )} */}
             </View>
           );
         })}
@@ -138,5 +138,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 10,
     padding: 10,
+  },
+  scrollView: {
+    width: '100%',
+    height: '100%',
+  },
+  textInput: {
+    width: '100%',
+    margin: 10,
+  },
+  geoView: {
+    width: '100%',
+    margin: 10,
+  },
+  imageView: {
+    margin: 10,
+    width: '100%',
+  },
+  videoView: {
+    margin: 10,
+    width: '100%',
+    height: 'auto',
   },
 });
