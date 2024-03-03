@@ -11,6 +11,7 @@ import {useEffect, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import TitleBar from '../../components/Common/TitleBar';
 import DiaryEntry from '../../components/HomePage/DiaryEntry';
+import AddNewEntryButton from '../../components/HomePage/AddNewEntryButton';
 import keyValueStorage from '../../utis/keyValueStorage';
 
 export default function HomePage() {
@@ -34,6 +35,7 @@ export default function HomePage() {
       {diaryEntries.map((entry, index) => (
         <DiaryEntry key={index} entry={JSON.parse(entry)} />
       ))}
+      <AddNewEntryButton />
     </View>
   );
 }
