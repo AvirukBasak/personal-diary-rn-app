@@ -28,9 +28,8 @@ export default function AddNewEntryButton() {
         setEntryContent(entryContents);
 
         // navigate to the new entry page
-        navigation.navigate('DiaryEntryPage', {
-          isEdit: true,
-        });
+        const navigationArgs = ['DiaryEntryPage', {isEdit: true}];
+        navigation.navigate(...(navigationArgs as never));
       }}>
       <Text style={styles.title}>Add New</Text>
     </Pressable>

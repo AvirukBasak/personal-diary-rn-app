@@ -56,9 +56,8 @@ export default function DiaryEntry({entry}: DiaryEntryProps) {
             setEntryDate(entry.date);
             setEntryContent(entryContents);
 
-            navigation.navigate('DiaryEntryPage', {
-              isEdit: true,
-            });
+            const navigationArgs = ['DiaryEntryPage', {isEdit: true}];
+            navigation.navigate(...(navigationArgs as never));
           });
         }}>
         {entry.title}
