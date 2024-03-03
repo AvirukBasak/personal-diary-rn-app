@@ -1,8 +1,16 @@
 import React from 'react';
-import {StatusBar, View} from 'react-native';
+import {AppRegistry, Platform, StatusBar, View} from 'react-native';
 import DialogBoxProvider from './src/contexts/DialogBoxContext';
 import EditDialogProvider from './src/contexts/EditDialogContext';
 import StackNavigationProvider from './src/contexts/StackNavigation';
+
+AppRegistry.registerComponent('ReactNativeTest2App', () => AppWithProviders);
+
+if (Platform.OS === 'web') {
+  const rootTag =
+    document.getElementById('root') || document.getElementById('X');
+  AppRegistry.runApplication('ReactNativeTest2App', {rootTag});
+}
 
 function App(): React.JSX.Element {
   return (
