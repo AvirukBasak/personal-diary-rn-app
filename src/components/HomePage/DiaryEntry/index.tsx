@@ -12,6 +12,7 @@ import {useContext} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {DiaryEntryContext} from '../../../contexts/DiaryEntryContext';
+import {openEntry} from './util';
 
 export interface DiaryEntryType {
   id: string;
@@ -25,7 +26,13 @@ export interface DiaryEntryProps {
 
 export default function DiaryEntry({entry}: DiaryEntryProps) {
   const navigation = useNavigation();
-  const {deleteDiaryEntry} = useContext(DiaryEntryContext);
+  const {
+    setCurrentEntryID,
+    setEntryContent,
+    setEntryDate,
+    setEntryTitle,
+    deleteDiaryEntry,
+  } = useContext(DiaryEntryContext);
 
   return (
     <View style={styles.container}>
@@ -42,7 +49,17 @@ export default function DiaryEntry({entry}: DiaryEntryProps) {
       <Text
         style={styles.title}
         onPress={() => {
-          navigation.navigate('DiaryEntryPage', {entry, isEdit: true});
+          openEntry(entry.id).then(entryContents => {
+            // set up the context
+            setCurrentEntryID(entry.id);
+            setEntryTitle(entry.title);
+            setEntryDate(entry.date);
+            setEntryContent(entryContents);
+
+            navigation.navigate('DiaryEntryPage', {
+              isEdit: true,
+            });
+          });
         }}>
         {entry.title}
       </Text>
