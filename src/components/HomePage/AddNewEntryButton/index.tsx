@@ -1,4 +1,4 @@
-import {Pressable, StyleSheet, Text} from 'react-native';
+import {Pressable, StyleSheet} from 'react-native';
 import React, {useContext} from 'react';
 import {randomCryptoUUID} from './util';
 import {
@@ -6,6 +6,7 @@ import {
   EntryContent,
 } from '../../../contexts/DiaryEntryContext';
 import {useNavigation} from '@react-navigation/native';
+import {Icon} from 'react-native-elements';
 
 export default function AddNewEntryButton() {
   const {setCurrentEntryID, setEntryContent, setEntryDate, setEntryTitle} =
@@ -31,7 +32,7 @@ export default function AddNewEntryButton() {
         const navigationArgs = ['DiaryEntryPage', {isEdit: true}];
         navigation.navigate(...(navigationArgs as never));
       }}>
-      <Text style={styles.title}>Add New</Text>
+      <Icon name="add" color="#fff" />
     </Pressable>
   );
 }
@@ -40,13 +41,12 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 10,
+    borderRadius: 50,
     position: 'absolute',
-    bottom: 70,
+    bottom: 50,
     right: 40,
     backgroundColor: '#26653A',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
+    padding: 20,
   },
   title: {
     fontSize: 18,
