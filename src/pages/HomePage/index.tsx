@@ -13,6 +13,7 @@ import TitleBar from '../../components/Common/TitleBar';
 import DiaryEntry from '../../components/HomePage/DiaryEntry';
 import AddNewEntryButton from '../../components/HomePage/AddNewEntryButton';
 import keyValueStorage from '../../utis/keyValueStorage';
+import logger from '../../utis/logger';
 
 export default function HomePage() {
   const [diaryEntries, setDiaryEntries] = useState<string[]>([]);
@@ -23,7 +24,8 @@ export default function HomePage() {
     keyValueStorage
       .getValue('userName')
       .then(value => setUserName(value || 'User'));
-  }, []);
+    logger.log('diary entries', diaryEntries);
+  }, [diaryEntries]);
 
   useEffect(() => {
     keyValueStorage.setValue('userName', userName);
