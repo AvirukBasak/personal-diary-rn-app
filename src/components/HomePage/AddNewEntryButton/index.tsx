@@ -1,5 +1,5 @@
-import {Pressable, StyleSheet} from 'react-native';
 import React, {useContext} from 'react';
+import {Pressable, StyleSheet} from 'react-native';
 import {randomCryptoUUID} from './util';
 import {
   DiaryEntryContext,

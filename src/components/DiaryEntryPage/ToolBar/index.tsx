@@ -17,22 +17,23 @@ picture and video on click does not open anything
 */
 
 import React from 'react';
-import {View} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {Icon} from 'react-native-elements';
 import {EntryContent} from '../../../contexts/DiaryEntryContext';
 import {FileType} from '../../../utis/documentFileSystem';
 import type {GeoLocationType} from './types.d.ts';
 import {getGeoLocation} from './util.ts';
+import colors from '../../../styles/colors.ts';
 
 // create the buttons
 function TextInputButton({onPress}: {onPress: () => void}) {
   return (
     <Icon
       name="text"
-      type="material"
+      type="entypo"
       onPress={onPress}
-      size={50}
-      color="black"
+      size={30}
+      color={colors.accentColor}
     />
   );
 }
@@ -49,8 +50,8 @@ function GeolocationButton({
       onPress={() => {
         getGeoLocation().then(location => onPress(location));
       }}
-      size={50}
-      color="black"
+      size={30}
+      color={colors.accentColor}
     />
   );
 }
@@ -85,8 +86,8 @@ function SaveButton({onPress}: {onPress: () => void}) {
       name="save"
       type="material"
       onPress={onPress}
-      size={50}
-      color="black"
+      size={30}
+      color={colors.accentColor}
     />
   );
 }
@@ -97,8 +98,8 @@ function DeleteButton({onPress}: {onPress: () => void}) {
       name="delete"
       type="material"
       onPress={onPress}
-      size={50}
-      color="black"
+      size={30}
+      color={colors.accentColor}
     />
   );
 }
@@ -117,7 +118,7 @@ export default function ToolBar({
   setEntryContent,
 }: ToolBarProps) {
   return (
-    <View>
+    <View style={styles.container}>
       <TextInputButton
         onPress={() => {
           setEntryContent([
@@ -172,3 +173,13 @@ export default function ToolBar({
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: 'white',
+    padding: 15,
+    margin: 'auto',
+  },
+});
