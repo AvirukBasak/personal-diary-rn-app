@@ -35,11 +35,13 @@ export default function EditDialogProvider({
   children: React.ReactNode;
 }) {
   const [title, setDialogTitle] = useState('');
+
   const [onEditCallback, setOnEditCallback] = useState<(data: any) => void>(
     (data: any) => {
       data;
     },
   );
+
   const {visible, setVisible, setContent} = useContext(DialogBoxContext);
 
   useEffect(() => {
@@ -67,8 +69,10 @@ export default function EditDialogProvider({
       value={{
         title,
         setDialogTitle,
+
         onEditCallback,
         setOnEditCallback,
+
         visible,
         setShowEditDialog: setVisible,
       }}>

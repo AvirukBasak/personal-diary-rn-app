@@ -1,4 +1,5 @@
 import React, {createContext, useState} from 'react';
+import DialogBox from '../components/Common/DialogBox';
 
 const DialogBoxContext = createContext({
   visible: false,
@@ -32,6 +33,7 @@ export default function DialogBoxProvider({
     <DialogBoxContext.Provider
       value={{visible, setVisible, content, setContent}}>
       {children}
+      {visible && <DialogBox />}
     </DialogBoxContext.Provider>
   );
 }
