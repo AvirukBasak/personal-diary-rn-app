@@ -4,6 +4,7 @@ import keyValueStorage from '../utis/keyValueStorage';
 import {FileType} from '../utis/documentFileSystem';
 import logger from '../utis/logger';
 import {showToast} from '../utis/uiHelpers';
+import {saveEntry} from '../components/HomePage/DiaryEntry/util';
 
 export interface EntryContent {
   content: string;
@@ -53,20 +54,7 @@ export default function DiaryEntryContextProvider({
 
     logger.log(`diary entry context: id: ${currentEntryID}`);
 
-    for (let i = 0; i < entryContent.length; i++) {
-      const fileName = `diaryEntry.${currentEntryID}.${i}`;
-      documentFileSystem.saveFile(
-        fileName,
-        entryContent[i].content,
-        entryContent[i].extension,
-      );
-    }
-
-    keyValueStorage.setValue(
-      `diaryEntry.${currentEntryID}`,
-      JSON.stringify(entryContent.length),
-    );
-
+    saveEntry(currentEntryID, entryTitle, entryDate, entryContent);
     showToast(`Saved ${entryTitle}`);
   }
 

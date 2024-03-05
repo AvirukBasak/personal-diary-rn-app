@@ -13,11 +13,14 @@ import {View, Text, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {DiaryEntryContext} from '../../../contexts/DiaryEntryContext';
 import {openEntry} from './util';
+import {FileType} from '../../../utis/documentFileSystem';
 
 export interface DiaryEntryType {
   id: string;
   date: string;
   title: string;
+  fileCount: number;
+  extensions: FileType[];
 }
 
 export interface DiaryEntryProps {
