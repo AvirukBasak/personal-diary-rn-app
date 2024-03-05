@@ -25,7 +25,7 @@ interface TitleBarProps {
 }
 
 export default function TitleBar({title, setTitle}: TitleBarProps) {
-  const {setDialogTitle, setOnEditCallback, setShowEditDialog} =
+  const {setEditDialogTitle, setOnEditCallback, setShowEditDialog} =
     useContext(EditDialogContext);
 
   return (
@@ -36,7 +36,7 @@ export default function TitleBar({title, setTitle}: TitleBarProps) {
         type="material"
         color={colors.accentColor}
         onPress={() => {
-          setDialogTitle(title);
+          setEditDialogTitle(title);
           setOnEditCallback(setTitle);
           setShowEditDialog(true);
         }}
