@@ -7,6 +7,7 @@ import {
 } from '../../../contexts/DiaryEntryContext';
 import {useNavigation} from '@react-navigation/native';
 import {Icon} from 'react-native-elements';
+import colors from '../../../styles/colors';
 
 export default function AddNewEntryButton() {
   const {setCurrentEntryID, setEntryContent, setEntryDate, setEntryTitle} =
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 50,
     right: 40,
-    backgroundColor: '#26653A',
+    backgroundColor: colors.accentBgColor,
     padding: 20,
   },
   title: {

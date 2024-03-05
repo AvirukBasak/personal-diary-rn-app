@@ -17,6 +17,7 @@ import {useContext} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Icon} from 'react-native-elements';
 import {EditDialogContext} from '../../../contexts/EditDialogContext';
+import colors from '../../../styles/colors';
 
 interface TitleBarProps {
   title: string;
@@ -33,7 +34,7 @@ export default function TitleBar({title, setTitle}: TitleBarProps) {
       <Icon
         name="edit"
         type="material"
-        color="#517fa4"
+        color={colors.accentColor}
         onPress={() => {
           setDialogTitle(title);
           setOnEditCallback(setTitle);
@@ -49,10 +50,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 10,
+    padding: 20,
+    shadowColor: '#000',
+    elevation: 0.7,
   },
   title: {
     fontSize: 20,
     fontWeight: '500',
+    color: 'black',
   },
 });
