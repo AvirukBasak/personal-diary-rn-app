@@ -25,6 +25,7 @@ import {getGeoLocation} from './util.ts';
 import colors from '../../../styles/colors.ts';
 import {DiaryEntryContext} from '../../../contexts/DiaryEntryContext.tsx';
 import {randomCryptoUUID} from '../../HomePage/AddNewEntryButton/util.ts';
+import logger from '../../../utis/logger.ts';
 
 // create the buttons
 function TextInputButton({onPress}: {onPress: () => void}) {
@@ -49,7 +50,9 @@ function GeolocationButton({
       name="location-on"
       type="material"
       onPress={() => {
-        getGeoLocation().then(location => onPress(location));
+        getGeoLocation()
+          .then(location => onPress(location))
+          .catch(logger.error);
       }}
       size={30}
       color={colors.accentColor}
