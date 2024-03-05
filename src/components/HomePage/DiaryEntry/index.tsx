@@ -26,25 +26,13 @@ export interface DiaryEntryProps {
 
 export default function DiaryEntry({entry}: DiaryEntryProps) {
   const navigation = useNavigation();
-  const {
-    setCurrentEntryID,
-    setEntryContent,
-    setEntryDate,
-    setEntryTitle,
-    deleteDiaryEntry,
-  } = useContext(DiaryEntryContext);
+  const {setCurrentEntryID, setEntryContent, setEntryDate, setEntryTitle} =
+    useContext(DiaryEntryContext);
 
   return (
     <View style={styles.container}>
       <View style={styles.dateBox}>
         <Text>{entry.date}</Text>
-        <Text
-          style={styles.deleteButton}
-          onPress={() => {
-            deleteDiaryEntry();
-          }}>
-          Delete
-        </Text>
       </View>
       <Text
         style={styles.title}
