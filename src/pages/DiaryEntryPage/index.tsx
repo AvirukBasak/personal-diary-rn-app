@@ -24,9 +24,7 @@ import React, {useContext} from 'react';
 import {View, StyleSheet, ScrollView, TextInput, Image} from 'react-native';
 import TitleBar from '../../components/Common/TitleBar';
 import ToolBar from '../../components/DiaryEntryPage/ToolBar';
-import DiaryEntryContextProvider, {
-  DiaryEntryContext,
-} from '../../contexts/DiaryEntryContext';
+import {DiaryEntryContext} from '../../contexts/DiaryEntryContext';
 import {FileType} from '../../utis/documentFileSystem';
 
 function EditTextView({children}: {children: string}) {
@@ -111,11 +109,7 @@ function DiaryEntryPage() {
 }
 
 export default function DiaryEntryPageWithProvider() {
-  return (
-    <DiaryEntryContextProvider>
-      <DiaryEntryPage />
-    </DiaryEntryContextProvider>
-  );
+  return <DiaryEntryPage />;
 }
 
 const styles = StyleSheet.create({

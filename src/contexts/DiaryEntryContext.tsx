@@ -32,6 +32,8 @@ export const DiaryEntryContext = createContext({
     content;
   },
 
+  entryAddedOrDeleted: false,
+
   saveDiaryEntry: () => {},
   deleteDiaryEntry: () => {},
 });
@@ -46,6 +48,8 @@ export default function DiaryEntryContextProvider({
   const [entryDate, setEntryDate] = useState(new Date().toLocaleDateString());
   const [entryContent, setEntryContent] = useState([] as EntryContent[]);
 
+  const [entryAddedOrDeleted, setEntryAddedOrDeleted] = useState(false);
+
   function saveDiaryEntry() {
     if (currentEntryID === '') {
       logger.error('diary entry context: currentEntryID is empty');
@@ -55,6 +59,7 @@ export default function DiaryEntryContextProvider({
     logger.log(`diary entry context: id: ${currentEntryID}`);
 
     saveEntry(currentEntryID, entryTitle, entryDate, entryContent);
+    setEntryAddedOrDeleted(old => !old);
     showToast(`Saved ${entryTitle}`);
   }
 
@@ -69,6 +74,7 @@ export default function DiaryEntryContextProvider({
       }
     });
 
+    setEntryAddedOrDeleted(old => !old);
     showToast(`Deleted ${entryTitle}`);
   }
 
@@ -86,6 +92,8 @@ export default function DiaryEntryContextProvider({
 
         entryContent,
         setEntryContent,
+
+        entryAddedOrDeleted,
 
         saveDiaryEntry,
         deleteDiaryEntry,

@@ -6,7 +6,7 @@ HomePage structure
 
 */
 
-import React from 'react';
+import React, {useContext} from 'react';
 import {useEffect, useState} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import TitleBar from '../../components/Common/TitleBar';
@@ -15,17 +15,21 @@ import AddNewEntryButton from '../../components/HomePage/AddNewEntryButton';
 import keyValueStorage from '../../utis/keyValueStorage';
 import logger from '../../utis/logger';
 import colors from '../../styles/colors';
+import {DiaryEntryContext} from '../../contexts/DiaryEntryContext';
 
 export default function HomePage() {
   const [diaryEntries, setDiaryEntries] = useState<DiaryEntryType[]>([]);
   const [userName, setUserName] = useState('');
+  const {entryAddedOrDeleted} = useContext(DiaryEntryContext);
 
   useEffect(() => {
     keyValueStorage.getAllDiaryEntries().then(entires => {
       const parsedEntries = entires.map(entry => JSON.parse(entry));
       setDiaryEntries(parsedEntries);
     });
+  }, [entryAddedOrDeleted]);
 
+  useEffect(() => {
     keyValueStorage
       .getValue('userName')
       .then(value => setUserName(value || 'User'));

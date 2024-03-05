@@ -3,6 +3,7 @@ import {AppRegistry, Platform, StatusBar, View} from 'react-native';
 import DialogBoxProvider from './src/contexts/DialogBoxContext';
 import EditDialogProvider from './src/contexts/EditDialogContext';
 import StackNavigationProvider from './src/contexts/StackNavigation';
+import DiaryEntryContextProvider from './src/contexts/DiaryEntryContext';
 
 AppRegistry.registerComponent('ReactNativeTest2App', () => AppWithProviders);
 
@@ -25,7 +26,9 @@ export default function AppWithProviders() {
     <StackNavigationProvider>
       <DialogBoxProvider>
         <EditDialogProvider>
-          <App />
+          <DiaryEntryContextProvider>
+            <App />
+          </DiaryEntryContextProvider>
         </EditDialogProvider>
       </DialogBoxProvider>
     </StackNavigationProvider>
