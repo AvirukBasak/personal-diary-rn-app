@@ -16,14 +16,14 @@ picture and video on click does not open anything
 
 */
 
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Icon} from 'react-native-elements';
-import {EntryContent} from '../../../contexts/DiaryEntryContext';
 import {FileType} from '../../../utis/documentFileSystem';
 import type {GeoLocationType} from './types.d.ts';
 import {getGeoLocation} from './util.ts';
 import colors from '../../../styles/colors.ts';
+import {DiaryEntryContext} from '../../../contexts/DiaryEntryContext.tsx';
 
 // create the buttons
 function TextInputButton({onPress}: {onPress: () => void}) {
@@ -104,19 +104,18 @@ function DeleteButton({onPress}: {onPress: () => void}) {
   );
 }
 
-interface ToolBarProps {
-  entryDate: string;
-  setEntryDate: (date: string) => void;
-  entryContent: Array<EntryContent>;
-  setEntryContent: (content: Array<EntryContent>) => void;
-}
-
 // create the toolbar
-export default function ToolBar({
-  setEntryDate,
-  entryContent,
-  setEntryContent,
-}: ToolBarProps) {
+export default function ToolBar() {
+  const {
+    entryContent,
+    setEntryContent,
+
+    setEntryDate,
+
+    saveDiaryEntry,
+    deleteDiaryEntry,
+  } = useContext(DiaryEntryContext);
+
   return (
     <View style={styles.container}>
       <TextInputButton
@@ -162,12 +161,14 @@ export default function ToolBar({
       <SaveButton
         onPress={() => {
           setEntryDate(new Date().toLocaleDateString());
+          saveDiaryEntry();
         }}
       />
 
       <DeleteButton
         onPress={() => {
           setEntryDate(new Date().toLocaleDateString());
+          deleteDiaryEntry();
         }}
       />
     </View>

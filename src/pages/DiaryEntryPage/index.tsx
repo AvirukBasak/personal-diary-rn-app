@@ -79,15 +79,8 @@ function GeoView({children}: {children: string}) {
 // }
 
 function DiaryEntryPage() {
-  const {
-    currentEntryID,
-    entryTitle,
-    setEntryTitle,
-    entryDate,
-    setEntryDate,
-    entryContent,
-    setEntryContent,
-  } = useContext(DiaryEntryContext);
+  const {currentEntryID, entryTitle, setEntryTitle, entryContent} =
+    useContext(DiaryEntryContext);
 
   return (
     <View key={currentEntryID} style={styles.container}>
@@ -112,12 +105,7 @@ function DiaryEntryPage() {
           );
         })}
       </ScrollView>
-      <ToolBar
-        entryDate={entryDate}
-        setEntryDate={setEntryDate}
-        entryContent={entryContent}
-        setEntryContent={setEntryContent}
-      />
+      <ToolBar />
     </View>
   );
 }
