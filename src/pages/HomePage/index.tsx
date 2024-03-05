@@ -32,7 +32,7 @@ export default function HomePage() {
   useEffect(() => {
     keyValueStorage
       .getValue('userName')
-      .then(value => setUserName(value || 'User'));
+      .then(value => setUserName(oldUserName => value || oldUserName));
   }, []);
 
   useEffect(() => {
