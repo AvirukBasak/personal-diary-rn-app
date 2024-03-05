@@ -8,7 +8,7 @@ export function saveEntry(
   entryID: string,
   entryTitle: string,
   entryDate: string,
-  entryContent: EntryContent[]
+  entryContent: EntryContent[],
 ): void {
   const entry: DiaryEntryType = {
     id: entryID,
