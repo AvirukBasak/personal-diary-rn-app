@@ -16,8 +16,16 @@ export default function StackNavigationProvider({
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="HomePage" component={HomePage} />
-        <Stack.Screen name="DiaryEntryPage" component={DiaryEntryPage} />
+        <Stack.Screen
+          name="HomePage"
+          component={HomePage}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="DiaryEntryPage"
+          component={DiaryEntryPage}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
       {children}
     </NavigationContainer>
