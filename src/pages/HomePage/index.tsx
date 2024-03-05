@@ -36,11 +36,8 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
-    keyValueStorage.setValue('userName', userName);
-  }, [userName]);
-
-  useEffect(() => {
     logger.log('loaded: userName:', userName);
+    keyValueStorage.setValue('userName', userName);
   }, [userName]);
 
   useEffect(() => {
