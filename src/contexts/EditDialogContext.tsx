@@ -46,7 +46,7 @@ export default function EditDialogProvider({
   const {visible, setVisible, setContent} = useContext(DialogBoxContext);
 
   function setShowEditDialog(vis: boolean) {
-    logger.log('setShowEditDialog', vis);
+    logger.log('edit dialog context: setShowEditDialog', vis);
     setContent(
       <View>
         <TextInput

@@ -2,6 +2,8 @@ import React, {createContext, useState} from 'react';
 import documentFileSystem from '../utis/documentFileSystem';
 import keyValueStorage from '../utis/keyValueStorage';
 import {FileType} from '../utis/documentFileSystem';
+import logger from '../utis/logger';
+import {showToast} from '../utis/uiHelpers';
 
 export interface EntryContent {
   content: string;
@@ -44,6 +46,13 @@ export default function DiaryEntryContextProvider({
   const [entryContent, setEntryContent] = useState([] as EntryContent[]);
 
   function saveDiaryEntry() {
+    if (currentEntryID === '') {
+      logger.error('diary entry context: currentEntryID is empty');
+      return;
+    }
+
+    logger.log(`diary entry context: id: ${currentEntryID}`);
+
     for (let i = 0; i < entryContent.length; i++) {
       const fileName = `diaryEntry.${currentEntryID}.${i}`;
       documentFileSystem.saveFile(
@@ -57,6 +66,8 @@ export default function DiaryEntryContextProvider({
       `diaryEntry.${currentEntryID}`,
       JSON.stringify(entryContent.length),
     );
+
+    showToast(`Saved ${entryTitle}`);
   }
 
   function deleteDiaryEntry() {
@@ -69,6 +80,8 @@ export default function DiaryEntryContextProvider({
         documentFileSystem.deleteFile(`diaryEntry.${currentEntryID}.${i}`);
       }
     });
+
+    showToast(`Deleted ${entryTitle}`);
   }
 
   return (
