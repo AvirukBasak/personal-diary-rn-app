@@ -1,13 +1,13 @@
 export function log(message: string, ...args: any[]) {
-  console.log(`[LOG] ${message}`, ...args);
+  console.log(`${message}`, ...args);
 }
 
 export function warn(message: string, ...args: any[]) {
-  console.warn(`[WARN] ${message}`, ...args);
+  console.warn(`${message}`, ...args);
 }
 
 export function error(message: string, ...args: any[]) {
-  console.error(`[ERROR] ${message}`, ...args);
+  console.error(`${message}`, ...args);
 }
 
 export default {
