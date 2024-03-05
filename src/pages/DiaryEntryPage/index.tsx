@@ -26,6 +26,7 @@ import TitleBar from '../../components/Common/TitleBar';
 import ToolBar from '../../components/DiaryEntryPage/ToolBar';
 import {DiaryEntryContext} from '../../contexts/DiaryEntryContext';
 import {FileType} from '../../utis/documentFileSystem';
+import {GeoLocationType} from '../../components/DiaryEntryPage/ToolBar/types';
 
 function EditTextView({children}: {children: string}) {
   return (
@@ -39,11 +40,12 @@ function EditTextView({children}: {children: string}) {
 }
 
 function GeoView({children}: {children: string}) {
-  children = children.replace(' ', '+');
+  const geoloc: GeoLocationType = JSON.parse(children);
+  const {currentLongitude, currentLatitude} = geoloc;
   return (
     <Image
       source={{
-        uri: `https://www.google.com/maps/search/?api=1&query=${children}`,
+        uri: `https://www.google.com/maps/search/?api=1&query=${currentLatitude},${currentLongitude}`,
       }}
       style={styles.geoView}
     />
