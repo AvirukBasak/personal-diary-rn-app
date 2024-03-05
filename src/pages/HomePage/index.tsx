@@ -19,7 +19,7 @@ import {DiaryEntryContext} from '../../contexts/DiaryEntryContext';
 
 export default function HomePage() {
   const [diaryEntries, setDiaryEntries] = useState<DiaryEntryType[]>([]);
-  const [userName, setUserName] = useState('');
+  const [userName, setUserName] = useState('User');
   const {entryAddedOrDeleted} = useContext(DiaryEntryContext);
 
   useEffect(() => {
