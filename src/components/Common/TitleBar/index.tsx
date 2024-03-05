@@ -51,8 +51,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 20,
-    shadowColor: '#000',
-    elevation: 0.7,
+    backgroundColor: 'white',
   },
   title: {
     fontSize: 20,
