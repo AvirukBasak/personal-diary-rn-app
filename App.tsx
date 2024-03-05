@@ -23,14 +23,14 @@ function App(): React.JSX.Element {
 
 export default function AppWithProviders() {
   return (
-    <StackNavigationProvider>
-      <DialogBoxProvider>
-        <EditDialogProvider>
+    <DialogBoxProvider>
+      <EditDialogProvider>
+        <StackNavigationProvider>
           <DiaryEntryContextProvider>
             <App />
           </DiaryEntryContextProvider>
-        </EditDialogProvider>
-      </DialogBoxProvider>
-    </StackNavigationProvider>
+        </StackNavigationProvider>
+      </EditDialogProvider>
+    </DialogBoxProvider>
   );
 }
