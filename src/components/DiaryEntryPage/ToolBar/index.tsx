@@ -24,6 +24,7 @@ import type {GeoLocationType} from './types.d.ts';
 import {getGeoLocation} from './util.ts';
 import colors from '../../../styles/colors.ts';
 import {DiaryEntryContext} from '../../../contexts/DiaryEntryContext.tsx';
+import {randomCryptoUUID} from '../../HomePage/AddNewEntryButton/util.ts';
 
 // create the buttons
 function TextInputButton({onPress}: {onPress: () => void}) {
@@ -107,6 +108,9 @@ function DeleteButton({onPress}: {onPress: () => void}) {
 // create the toolbar
 export default function ToolBar() {
   const {
+    currentEntryID,
+    setCurrentEntryID,
+
     entryContent,
     setEntryContent,
 
@@ -161,6 +165,9 @@ export default function ToolBar() {
       <SaveButton
         onPress={() => {
           setEntryDate(new Date().toLocaleDateString());
+          if (currentEntryID === '') {
+            setCurrentEntryID(randomCryptoUUID());
+          }
           saveDiaryEntry();
         }}
       />
